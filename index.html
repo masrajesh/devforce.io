@@ -1,0 +1,90 @@
+<html>
+<body>
+<style type='text/css'>
+	.embeddedServiceHelpButton .helpButton .uiButton {
+		background-color: #005290;
+		font-family: "Arial", sans-serif;
+	}
+	.embeddedServiceHelpButton .helpButton .uiButton:focus {
+		outline: 1px solid #005290;
+	}
+</style>
+
+<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+<script type='text/javascript'>
+	var initESW = function(gslbBaseURL) {
+		embedded_svc.settings.displayHelpButton = true; //Or false
+		embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
+		embedded_svc.addEventHandler("onQueueUpdate", function(data) {
+		    console.log("onQueueUpdate event was fired. liveAgentSessionKey was " + data.liveAgentSessionKey + "and queuePosition was " + data.queuePosition);
+			window.postMessage(
+			    {
+				message: "Are Agents Available?",
+				type: "chasitor.sendMessage"
+			    },
+			    window.parent.location.href
+			);
+			alert('test');
+		});
+		embedded_svc.settings.extraPrechatInfo = [{
+												      "entityFieldMaps":[
+												         {
+												            "doCreate":false,
+												            "doFind":false,
+												            "fieldName":"LastName",
+												            "isExactMatch":false,
+												            "label":"Last Name"
+												         },
+												         {
+												            "doCreate":false,
+												            "doFind":false,
+												            "fieldName":"FirstName",
+												            "isExactMatch":false,
+												            "label":"First Name"
+												         },
+												         {
+												            "doCreate":false,
+												            "doFind":true,
+												            "fieldName":"Email",
+												            "isExactMatch":true,
+												            "label":"Email"
+												         }
+												      ],
+												      "entityName":"Contact",
+												      "saveToTranscript":"Contact",
+												      "showOnCreate":true
+												   }
+												];	
+		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+		embedded_svc.settings.entryFeature = 'LiveAgent';
+
+		embedded_svc.init(
+			'https://enable-centrica--bot.my.salesforce.com',
+			'https://bot-britishgasx.cs126.force.com/bgx',
+			gslbBaseURL,
+			'00D3L0000008jat',
+			'WebChat_Centrica',
+			{
+				baseLiveAgentContentURL: 'https://c.la1-c1cs-lo2.salesforceliveagent.com/content',
+				deploymentId: '5724J000000LIOS',
+				buttonId: '5734J000000LJgv',
+				baseLiveAgentURL: 'https://d.la1-c1cs-lo2.salesforceliveagent.com/chat',
+				eswLiveAgentDevName: 'WebChat_Centrica',
+				isOfflineSupportEnabled: false
+			}
+		);
+	};
+
+	if (!window.embedded_svc) {
+		var s = document.createElement('script');
+		s.setAttribute('src', 'https://enable-centrica--bot.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+		s.onload = function() {
+			initESW(null);
+		};
+		document.body.appendChild(s);
+	} else {
+		initESW('https://service.force.com');
+	}
+</script>
+</body>
+</html>
