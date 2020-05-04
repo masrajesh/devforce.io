@@ -31,6 +31,7 @@
 			    window.parent.location.href
 			);
 		});
+		
 		embedded_svc.settings.extraPrechatInfo = [{
 												      "entityFieldMaps":[
 												         {
@@ -88,7 +89,51 @@
 		};
 		document.body.appendChild(s);
 	} else {
+		alert('u r here too');
 		initESW('https://service.force.com');
+  
+		  // replacing in-string url with clickable-links
+		  liveagent.addEventListener("chasitorAgentChatMessage", function(message) {
+				setTimeout(function () {
+		      var chatMsg = $(".chatContent.agentContent").last().text();
+		      chatMsg = linkify(chatMsg);
+		      $(".chatContent.agentContent").last().html(chatMsg);
+		    }, 0);
+		  });
+  
+		  liveagent.addEventListener("chasitorChasitorChatMessage", function(message) {
+				setTimeout(function () {
+		      var chatMsg = $(".chatContent.agentContent").last().text();
+		      chatMsg = linkify(chatMsg);
+		      $(".chatContent.agentContent").last().html(chatMsg);
+		    }, 0);
+		  });
+  
+	  liveagent.addEventListener("postChat", function(message) {
+		      var postChatUrl = message.getUrl();
+			//var postChatMsg = 'Would you like to complete our survey?';
+			$(".messageOverlayHeaderText").text("Want to take a survey?");
+		      //postChatUrl = '<a href="' + postChatUrl + '" target="_blank"/>' 
+			$(".messageOverlayTopButton > span").text("Take Survey");
+		      $(".messageOverlayBottomButton > span").text("No Thanks");
+			    $(".messageOverlayBottomButton").on("click", function () {
+			liveagent.chasitor.cancelChat();
+		      });
+		      $(".messageOverlayTopButton").on("click", function (event) {
+				liveagent.chasitor.cancelChat();
+			event.preventDefault();
+			event.stopPropagation();
+				window.open(postChatUrl, '_blank');
+		      });
+
+		});
+  
+		function linkify(text) {
+		    var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+		    return text.replace(urlRegex, function(url) {
+			return '<a href="' + url + '" target="_blank">' + url + '</a>';
+		    });
+		}		
 	}
 </script>
 </body>
