@@ -18,7 +18,10 @@
 		embedded_svc.settings.autoOpenPostChat = true;
 		embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
 		embedded_svc.addEventHandler("onQueueUpdate", function(data) {
-		    console.log("onQueueUpdate event was fired. liveAgentSessionKey was " + data.liveAgentSessionKey + "and queuePosition was " + data.queuePosition);
+			if(data.queuePosition === 0) {
+				alert('your queue position is' + data.queuePosition);
+				console.log("onQueueUpdate event was fired. liveAgentSessionKey was " + data.liveAgentSessionKey + "and queuePosition was " + data.queuePosition);
+			}			    
 			window.postMessage(
 			    {
 				message: "Are Agents Available?",
