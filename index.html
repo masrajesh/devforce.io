@@ -31,41 +31,40 @@
 			    window.parent.location.href
 			);
 		});
-		embedded_svc.settings.prepopulatedPrechatFields = {
-		    FirstName: “Raj”,
-		    LastName: “Shan”,
-		    Email: “rajesh.shanmugasundaram@centrica.com”,
-		    Subject: “Submit meter reading”
-		};		
 		embedded_svc.settings.extraPrechatInfo = [{
-												      "entityFieldMaps":[
-												         {
-												            "doCreate":false,
-												            "doFind":false,
-												            "fieldName":"LastName",
-												            "isExactMatch":false,
-												            "label":"Last Name"
-												         },
-												         {
-												            "doCreate":false,
-												            "doFind":false,
-												            "fieldName":"FirstName",
-												            "isExactMatch":false,
-												            "label":"First Name"
-												         },
-												         {
-												            "doCreate":false,
-												            "doFind":true,
-												            "fieldName":"Email",
-												            "isExactMatch":true,
-												            "label":"Email"
-												         }
-												      ],
-												      "entityName":"Contact",
-												      "saveToTranscript":"Contact",
-												      "showOnCreate":true
-												   }
-												];	
+		      "entityFieldMaps":[
+			 {
+			    "doCreate":false,
+			    "doFind":false,
+			    "fieldName":"LastName",
+			    "isExactMatch":false,
+			    "label":"Last Name"
+			 },
+			 {
+			    "doCreate":false,
+			    "doFind":false,
+			    "fieldName":"FirstName",
+			    "isExactMatch":false,
+			    "label":"First Name"
+			 },
+			 {
+			    "doCreate":false,
+			    "doFind":true,
+			    "fieldName":"Email",
+			    "isExactMatch":true,
+			    "label":"Email"
+			 }
+		      ],
+		      "entityName":"Contact",
+		      "saveToTranscript":"Contact",
+		      "showOnCreate":true
+		   }
+		];
+		embedded_svc.settings.prepopulatedPrechatFields = {
+		    FirstName: "Raj",
+		    LastName: "Shan",
+		    Email: "rajesh.shanmugasundaram@centrica.com"
+		}; 		
 		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 		embedded_svc.settings.entryFeature = 'LiveAgent';
 
