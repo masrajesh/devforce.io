@@ -20,7 +20,6 @@
 		embedded_svc.settings.defaultMinimizedText = 'Chat Now';
 		embedded_svc.addEventHandler("onQueueUpdate", function(data) {
 			if(data.queuePosition === 0) {
-				alert('your queue position is' + data.queuePosition);
 				console.log("onQueueUpdate event was fired. liveAgentSessionKey was " + data.liveAgentSessionKey + "and queuePosition was " + data.queuePosition);
 			}			    
 			window.postMessage(
