@@ -21,6 +21,7 @@
 		embedded_svc.addEventHandler("onQueueUpdate", function(data) {
 			if(data.queuePosition > 0) {
 				alert('Sorry for the wait. All our agents are serving other customers, please hold while you are connected to the next available agent.');
+				embedded_svc.postMessage('chasitor.sendMessage', 'Sorry for the wait. All our agents are serving other customers, please hold while you are connected to the next available agent.')
 				console.log("onQueueUpdate event was fired. liveAgentSessionKey was " + data.liveAgentSessionKey + "and queuePosition was " + data.queuePosition);
 			}			    
 			window.postMessage(
