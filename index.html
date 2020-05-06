@@ -19,7 +19,8 @@
 		embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
 		embedded_svc.settings.defaultMinimizedText = 'Chat Now';
 		embedded_svc.addEventHandler("onQueueUpdate", function(data) {
-			if(data.queuePosition === 0) {
+			if(data.queuePosition > 0) {
+				alert('Sorry for the wait. All our agents are serving other customers, please hold while you are connected to the next available agent.');
 				console.log("onQueueUpdate event was fired. liveAgentSessionKey was " + data.liveAgentSessionKey + "and queuePosition was " + data.queuePosition);
 			}			    
 			window.postMessage(
